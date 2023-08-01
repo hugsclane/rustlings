@@ -1,4 +1,3 @@
-// hashmaps3.rs
 //
 // A list of scores (one per line) of a soccer match is given. Each line is of
 // the form : "<team_1_name>,<team_2_name>,<team_1_goals>,<team_2_goals>"
@@ -11,8 +10,7 @@
 //
 // Make me pass the tests!
 //
-// Execute `rustlings hint hashmaps3` or use the `hint` watch subcommand for a
-// hint.
+// Execute `rustlings hint hashmaps3` or use the `hint` watch subcommand for a hint.
 
 // I AM NOT DONE
 
@@ -27,9 +25,11 @@ struct Team {
 fn build_scores_table(results: String) -> HashMap<String, Team> {
     // The name of the team is the key and its associated struct is the value.
     let mut scores: HashMap<String, Team> = HashMap::new();
+    //Make teams 
 
     for r in results.lines() {
         let v: Vec<&str> = r.split(',').collect();
+        //splits r, result by commas
         let team_1_name = v[0].to_string();
         let team_1_score: u8 = v[2].parse().unwrap();
         let team_2_name = v[1].to_string();
@@ -39,7 +39,32 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // will be the number of goals conceded from team_2, and similarly
         // goals scored by team_2 will be the number of goals conceded by
         // team_1.
+        // let Team1 = Team {
+        //     goals_scored: u8::from(0),
+        //     goals_conceded: u8::from(0),
+        // };
+        // let Team2 = Team {
+        //     goals_scored: u8::from(0),
+        //     goals_conceded: u8::from(0),
+        //     };
+        println!("{}: {} | {}: {} ",team_1_name,team_1_score,team_2_name,team_2_score);
+        scores.entry(team_1_name).and_modify(|team| {
+            team.goals_scored += team_1_score;
+            team.goals_conceded += team_2_score;
+        }).or_insert_with_key(|team_name| Team {
+            goals_scored: team_1_score,
+            goals_conceded: team_2_score,
+        });
+        scores.entry(team_2_name).and_modify(|team| {
+            team.goals_scored += team_2_score;
+            team.goals_conceded += team_1_score;
+        }).or_insert_with_key(|team_name| Team {
+            goals_scored: team_2_score,
+            goals_conceded: team_1_score,
+        });
     }
+
+
     scores
 }
 
@@ -59,7 +84,6 @@ mod tests {
     #[test]
     fn build_scores() {
         let scores = build_scores_table(get_results());
-
         let mut keys: Vec<&String> = scores.keys().collect();
         keys.sort();
         assert_eq!(
@@ -74,6 +98,7 @@ mod tests {
         let team = scores.get("England").unwrap();
         assert_eq!(team.goals_scored, 5);
         assert_eq!(team.goals_conceded, 4);
+
     }
 
     #[test]
