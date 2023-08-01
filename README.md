@@ -1,3 +1,7 @@
+## Justification
+This repo is a public guide to my journey learning rust through Rustlings
+
+
 # Exercise to Book Chapter mapping
 
 | Exercise               | Book Chapter        |
