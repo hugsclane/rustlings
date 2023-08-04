@@ -10,7 +10,6 @@
 fn main() {
     let vec0 = Vec::new();
 
-    let mut vec1 = fill_vec(vec0);
     // Do not move the following line!
     let mut vec1 = fill_vec(&vec0);
 
