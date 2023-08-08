@@ -16,18 +16,17 @@
 // There are at least two ways to implement this that are both correct-- but one
 // is a lot shorter!
 //
-// Execute `rustlings hint errors2` or use the `hint` watch subcommand for a
-// hint.
+// Execute `rustlings hint errors2` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
 
 use std::num::ParseIntError;
 
 pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
     let processing_fee = 1;
     let cost_per_item = 5;
-    let qty = item_quantity.parse::<i32>();
-
+    let qty = item_quantity.parse::<i32>()?;
+    // the ? operator provides an early return to the result in the form of a ParseIntError, this
+    // is due to the parse::<i32>() function, different structs need to be called in the signature
     Ok(qty * cost_per_item + processing_fee)
 }
 
@@ -45,6 +44,8 @@ mod tests {
         assert_eq!(
             total_cost("beep boop").unwrap_err().to_string(),
             "invalid digit found in string"
+            //this is the unique corresponding error string, this will also be unique as defined by
+            //the panic faliure message
         );
     }
 }
