@@ -8,11 +8,15 @@
 // Execute `rustlings hint traits3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 pub trait Licensed {
-    fn licensing_info(&self) -> String;
+    fn licensing_info(&self) -> String {
+    "Some information".into()
+    }
 }
+//data.into() called from a trait(&self)-> dataType and implemented for a stuct will
+//introduce this trait to the struct, this seems very useful but very easy to overlook if not
+//practiced.
 
 struct SomeSoftware {
     version_number: i32,

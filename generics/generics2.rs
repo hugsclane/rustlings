@@ -6,17 +6,19 @@
 // Execute `rustlings hint generics2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
-struct Wrapper {
-    value: u32,
+struct Wrapper<Gen> {
+    value: Gen,
 }
 
-impl Wrapper {
-    pub fn new(value: u32) -> Self {
+//the wrapper needs the generic type name in the signature to be in scope.
+
+impl<Gen> Wrapper<Gen> {
+    pub fn new(value: Gen) -> Self {
         Wrapper { value }
     }
 }
+//impl defines on the type, so it requires generic type names. 
 
 #[cfg(test)]
 mod tests {
