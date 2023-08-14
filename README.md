@@ -1,4 +1,4 @@
-## Justification
+## Intro
 This repo is a public guide to my journey learning rust through Rustlings
 
 
