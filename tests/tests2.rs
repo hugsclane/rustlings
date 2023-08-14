@@ -6,12 +6,16 @@
 // Execute `rustlings hint tests2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 #[cfg(test)]
 mod tests {
+    // #[test]
+    // fn you_have_asserted_eq() {
+    //     assert_eq!(88.0, 8.8*10.0)
+    // }
+    // it only checks the first one for some reason, I'm sure this will become clear.
     #[test]
     fn you_can_assert_eq() {
-        assert_eq!();
+        assert_eq!("this is a string", "this is another string");
     }
 }
