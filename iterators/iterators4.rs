@@ -3,9 +3,16 @@
 // Execute `rustlings hint iterators4` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 pub fn factorial(num: u64) -> u64 {
+    (1..=num).rfold(1u64,|nums,y| nums.checked_mul(y).unwrap())
+    //the hints reccomend using fold and rfold, r fold starts from the back of an iterator so it is
+    //the obvious choice
+
+    //(1..=num).product()
+    //NOTE:range has a fucntion product which iterats over a iterator and mutilplies all elements.
+ 
+
     // Complete this function to return the factorial of num
     // Do not use:
     // - return

@@ -1,5 +1,3 @@
-// iterators5.rs
-//
 // Let's define a simple model to track Rustlings exercise progress. Progress
 // will be modelled using a hash map. The name of the exercise is the key and
 // the progress is the value. Two counting functions were created to count the
@@ -10,8 +8,6 @@
 //
 // Execute `rustlings hint iterators5` or use the `hint` watch subcommand for a
 // hint.
-
-// I AM NOT DONE
 
 use std::collections::HashMap;
 
@@ -33,9 +29,15 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 }
 
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
+    // map.drain_filter(|_k,prog| prog == &value).collect().len()
+    // drain_filter is not implemented for hashmaps yet sadly, when it is this will be a more
+    // idiomatic solution.
+    map.values().filter(|prog| *prog == &value).count()
+    //values() creates an iterator over map, filter(/* restrictions */) creates a map that satisfy
+    //our restrictions count() returns an iterators size.
+
     // map is a hashmap with String keys and Progress values.
     // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -51,10 +53,12 @@ fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progres
 }
 
 fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
-    // collection is a slice of hashmaps.
+    collection.iter().map(|map| count_iterator(map,value)).sum()
+    // collection is a slice of hashmaps, create an iterator over each hashmap then pass the
+    // hashmaps to the count_iterator we made before to get a progress count, then sum them
+    // together. 
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
-    todo!();
 }
 
 #[cfg(test)]
